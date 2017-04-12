@@ -156,6 +156,7 @@ void destroyNode(char data[50], node* firstNode) {
 	if(nodeAddr != NULL) {
 		if(nodeAddr->next == NULL) {
 			nodeAddr->back->next = NULL;
+			nodeAddr->next->back = NULL;
 		} else {
 			nodeAddr->back->next = nodeAddr->next;
 		}
