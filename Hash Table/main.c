@@ -5,7 +5,6 @@
 typedef struct album
 {
     char artist[50];
-    int cnt;
     struct album *next;
 }album;
 
@@ -26,7 +25,7 @@ int main(void)
     for(i = 0; i < 6; i++)
         {
             hashtable[i].next = NULL;
-            hashtable[i].cnt = 0;
+            strcpy(hashtable[i].artist, "\0");
         }
 
     char input[50];
@@ -67,75 +66,41 @@ void insertAlbum(char artist[50])
     struct album *currentPtr;
     struct album *previousPtr;
     // Check for empty list
-    if(hashtable[index].cnt != 1) {
-        printf("Test 1\n");
+    if(strcmp(hashtable[index].artist, "\0") == 0) {
         hashtable[index].next = newPtr;
-        printf("Test 2\n");
         strcpy(hashtable[index].next->artist, artist);
-        printf("Test 3\n");
         hashtable[index].next = NULL;
-        printf("Test 4\n");
-        hashtable[index].cnt += 1;
-        printf("Test 5\n");
+        //hashtable[index].cnt += 1;
 
     } else {
         if(_stricmp(hashtable[index].next->artist, artist) > 0) {
-                    printf("Test 6\n");
             strcpy(newPtr->artist, artist);
-                    printf("Test 7\n");
             currentPtr = hashtable[index].artist;
-                    printf("Test 8\n");
             hashtable[index].next = newPtr;
-                    printf("Test 9\n");
-            hashtable[index].cnt += 1;
+            //hashtable[index].cnt += 1;
         } else {
-                    printf("Test 10\n");
             previousPtr = hashtable[index].artist;
-                    printf("Test 11\n");
             currentPtr = hashtable[index].next->artist;
-                    printf("Test 12\n");
-            hashtable[index].cnt += 1;
+            //hashtable[index].cnt += 1;
             while(_stricmp(currentPtr->artist, artist) < 0) {
-                printf("check 1\n");
                 if(currentPtr->next != NULL) {
-                    printf("check 2\n");
                     currentPtr = currentPtr->next;
-                    printf("check 3\n");
                     previousPtr = previousPtr->next;
-                    printf("check 4\n");
-                    hashtable[index].cnt += 1;
                 } else {
-
-                    printf("check 5\n");
                     break;
                 }
-                hashtable[index].cnt += 1;
-                printf("check 6\n");
             }
-                    printf("Test 13\n");
             if(_stricmp(currentPtr->artist, artist) > 0) {
-                            printf("Test 14\n");
                 strcpy(newPtr->artist, artist);
-                    printf("Test 15\n");
                 newPtr->next = currentPtr;
-                        printf("Test 16\n");
                 previousPtr->next = newPtr;
-                        printf("Test 17\n");
             } else {
-                        printf("Test 18\n");
                 strcpy(newPtr->artist, artist);
-                        printf("Test 19\n");
                 newPtr->next = NULL;
-                        printf("Test 20\n");
                 currentPtr->next = newPtr;
-                        printf("Test 21\n");
             }
         }
     }
-    for(j = 0; j < 6; j++)
-        {
-            printf("%i\n",hashtable[j].cnt);
-        }
 }
 
 
